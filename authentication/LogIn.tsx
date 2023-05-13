@@ -27,7 +27,7 @@ const Login: FC = props => {
 
   const login = async () => {
     if (user.email && user.password) {
-      const {users} = await firebase
+      const users = await firebase
         .auth()
         .signInWithEmailAndPassword(user?.email, user.password);
       Alert.alert('Success');
@@ -37,7 +37,11 @@ const Login: FC = props => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Login" onPress={() => props.navigation.goBack()} />
+      <Header
+        btn="md-chevron-back"
+        title="Login"
+        onPress={() => props.navigation.goBack()}
+      />
       <View style={{margin: 30}} />
 
       <Input

@@ -13,12 +13,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 interface Props {
   onPress?: () => void;
   title: string;
+  btn: string;
 }
 const Header: FC<Props> = props => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={props.onPress}>
-        {/* <Ionicons name="" size={20} color="#333" /> */}
+        <Ionicons name={props.btn} size={25} color="#333" />
       </TouchableOpacity>
       <Text style={styles.title}> {props.title} </Text>
     </View>
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 15,
     paddingLeft: 24,
-    paddingRight: 55,
+    paddingRight: 65,
   },
 
   title: {

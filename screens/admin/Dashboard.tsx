@@ -15,19 +15,20 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import {FlatList} from 'react-native-gesture-handler';
 import RenderPendingPosts from '../../components/renderPendingPosts';
+import Button from '../../components/Button';
+import {width} from '../../constants/theme';
 const Dashboard: FC = props => {
   const [post, setPost] = useState<any>(null);
+
   const fetchPendings = async () => {
     const fetchedPosts = await firebase
       .firestore()
       .collection('posts')
-      .where('approved', '==', 'false')
+      .where('approved', '==', false)
       .get();
     setPost([...fetchedPosts.docs]);
   };
-  useEffect(() => {
-    fetchPendings();
-  });
+
   const onApprove = (id: string) => {
     Alert.alert(`Item ${id} will be approved`);
   };
@@ -37,8 +38,12 @@ const Dashboard: FC = props => {
   };
 
   return (
-    <View style={styles.container}>
-      <Header onPress={() => props.navigation.goBack()} title="Dashboard" />
+    <SafeAreaView style={styles.container}>
+      <Header
+        onPress={() => props.navigation.goBack()}
+        title="Dashboard"
+        btn="md-chevron-back"
+      />
       <FlatList
         data={post}
         renderItem={({item}) => (
@@ -51,14 +56,14 @@ const Dashboard: FC = props => {
           />
         )}
       />
-    </View>
+      <Button btnName="Refresh" onPress={fetchPendings} width={width * 0.9} />
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFF',
-    alignItems: 'center',
   },
 });
 export default Dashboard;

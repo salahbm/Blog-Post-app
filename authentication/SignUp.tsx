@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontSize: 16,
     fontWeight: '800',
-    color: '#e1e3e2',
+    color: '#AEB6BF',
     lineHeight: 24,
 
     alignSelf: 'center',

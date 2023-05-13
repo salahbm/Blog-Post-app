@@ -53,7 +53,7 @@ const Home: FC = props => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Home Screen" />
+      <Header title="Home Screen" btn="home-outline" />
       <TextInput
         style={styles.input}
         placeholder="enter the msg"
