@@ -6,7 +6,7 @@ import Dashboard from '../screens/admin/Dashboard';
 const {Navigator, Screen} = createStackNavigator();
 export const AppStack: FC = () => {
   return (
-    <Navigator>
+    <Navigator screenOptions={{headerShown: false}}>
       <Screen name="Home" component={Home} />
       <Screen name="Dashboard" component={Dashboard} />
     </Navigator>
