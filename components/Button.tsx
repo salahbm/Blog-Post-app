@@ -11,7 +11,7 @@ import {
 
 interface Props {
   btnName: string;
-  onPress: () => void;
+  onPress?: () => void;
   width: number;
   navigation?: any;
 }

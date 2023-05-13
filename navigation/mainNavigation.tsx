@@ -17,9 +17,9 @@ const MainNavigation: FC = () => {
         setUser(null);
       }
     });
-
     subscribe();
   }, []);
+
   return (
     <NavigationContainer>
       {user !== null ? <AppStack /> : <AuthStack />}

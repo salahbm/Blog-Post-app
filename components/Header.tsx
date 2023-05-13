@@ -9,13 +9,13 @@ import {
   SafeAreaView,
 } from 'react-native';
 interface Props {
-  onPress: () => void;
+  onPress?: () => void;
   title: string;
 }
 const Header: FC<Props> = props => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={props.onPress} style={styles.btn}>
+      <TouchableOpacity onPress={props.onPress}>
         <Text style={styles.back}>Back</Text>
       </TouchableOpacity>
       <Text style={styles.title}> {props.title} </Text>
@@ -29,17 +29,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     marginTop: 15,
-    justifyContent: 'space-between',
+    paddingLeft: 24,
+    paddingRight: 45,
   },
-  btn: {
-    alignSelf: 'flex-start',
-  },
+
   title: {
     color: '#333',
     fontSize: 20,
     fontWeight: 'bold',
     lineHeight: 22,
     letterSpacing: 0.4,
+    flex: 1,
     textAlign: 'center',
   },
   back: {
