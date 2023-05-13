@@ -10,6 +10,7 @@ const Input: FC<Props> = props => {
   return (
     <View style={styles.container}>
       <TextInput
+        autoCapitalize="none"
         style={styles.input}
         placeholder={props.placeholder}
         secureTextEntry={props.secureTextEntry || false}

@@ -52,7 +52,7 @@ const Home: FC = props => {
   });
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header title="Home Screen" />
       <TextInput
         style={styles.input}
@@ -70,7 +70,7 @@ const Home: FC = props => {
       ) : null}
       <Button btnName="Post" width={width * 0.9} onPress={post} />
       <Button btnName="logout" width={width * 0.9} onPress={signout} />
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({

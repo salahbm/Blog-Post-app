@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   Alert,
 } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 interface Props {
   onPress?: () => void;
   title: string;
@@ -17,7 +18,7 @@ const Header: FC<Props> = props => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={props.onPress}>
-        <Text style={styles.back}>Back</Text>
+        {/* <Ionicons name="" size={20} color="#333" /> */}
       </TouchableOpacity>
       <Text style={styles.title}> {props.title} </Text>
     </View>
