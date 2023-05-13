@@ -7,12 +7,15 @@ import {
   TextInput,
   TouchableOpacity,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import {width} from '../constants/theme';
 import Header from '../components/Header';
-
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 const Login: FC = props => {
   const [user, setUser] = useState<{
     password: string;
@@ -22,6 +25,16 @@ const Login: FC = props => {
     email: '',
   });
 
+  const login = async () => {
+    if (user.email && user.password) {
+      const {users} = await firebase
+        .auth()
+        .signInWithEmailAndPassword(user?.email, user.password);
+      Alert.alert('Success');
+    } else {
+      Alert.alert('Missing Fields');
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <Header title="Login" onPress={() => props.navigation.goBack()} />
@@ -45,11 +58,7 @@ const Login: FC = props => {
           bottom: 60,
           alignSelf: 'center',
         }}>
-        <Button
-          btnName="Login"
-          width={width * 0.9}
-          onPress={() => console.log('dgsokabhdfg')}
-        />
+        <Button btnName="Login" width={width * 0.9} onPress={login} />
       </View>
     </SafeAreaView>
   );

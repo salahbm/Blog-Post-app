@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 12,
     alignSelf: 'center',
+    marginVertical: 5,
   },
   name: {
     color: '#FFFF',

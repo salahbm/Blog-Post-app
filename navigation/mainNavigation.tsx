@@ -9,14 +9,14 @@ import {AuthStack} from './authStack';
 const MainNavigation: FC = () => {
   const [user, setUser] = useState<any>(null);
 
+  const subscribe = firebase.auth().onAuthStateChanged((userData: any) => {
+    if (userData) {
+      setUser(userData);
+    } else {
+      setUser(null);
+    }
+  });
   useEffect(() => {
-    const subscribe = firebase.auth().onAuthStateChanged((userData: any) => {
-      if (userData) {
-        setUser(userData);
-      } else {
-        setUser(null);
-      }
-    });
     subscribe();
   }, []);
 
