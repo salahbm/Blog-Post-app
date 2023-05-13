@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 interface Props {
   onPress?: () => void;
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 15,
     paddingLeft: 24,
-    paddingRight: 45,
+    paddingRight: 55,
   },
 
   title: {
