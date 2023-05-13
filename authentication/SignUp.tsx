@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const App: FC = () => {
+const Signup: FC = () => {
   return (
     <View style={styles.container}>
       <Text>sign up screen</Text>
@@ -15,4 +15,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-export default App;
+export default Signup;
