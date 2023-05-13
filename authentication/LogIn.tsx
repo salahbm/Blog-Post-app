@@ -1,11 +1,19 @@
 import React, {FC} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-
-const Login: FC = () => {
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
+import Header from '../components/Header';
+const Login: FC = props => {
   return (
-    <View style={styles.container}>
-      <Text>Login screen</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Header title="Login" onPress={() => props.navigation.goBack()} />
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({

@@ -18,12 +18,15 @@ const Input: FC<Props> = props => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
-    width: width * 0.8,
+    width: width * 0.9,
+    height: 50,
     borderRadius: 16,
     alignSelf: 'center',
     backgroundColor: '#e3e3e3',
+    marginVertical: 5,
   },
   input: {
     padding: 15,
