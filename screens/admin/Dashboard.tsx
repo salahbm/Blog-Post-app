@@ -18,22 +18,32 @@ import RenderPendingPosts from '../../components/renderPendingPosts';
 import Button from '../../components/Button';
 import {width} from '../../constants/theme';
 const Dashboard: FC = props => {
-  const [post, setPost] = useState<any>(null);
+  const [posts, setPosts] = useState<any>(null);
+  useEffect(() => {
+    const fetchPendings = async () => {
+      const fetchedPosts = await firebase
+        .firestore()
+        .collection('posts')
+        .where('approved', '==', false)
+        .get();
+      setPosts([...fetchedPosts.docs]);
+    };
+    fetchPendings();
+  }, []);
 
-  const fetchPendings = async () => {
-    const fetchedPosts = await firebase
+  const onApprove = async (id: string) => {
+    Alert.alert(`Item ${id} will be approved`);
+    const post = await firebase.firestore().collection('posts').doc(id).get();
+    post.ref.set({approved: true}, {merge: true});
+  };
+
+  const onReject = async (id: string) => {
+    Alert.alert(`Item ${id} will be rejected`);
+    const post = await firebase
       .firestore()
       .collection('posts')
-      .where('approved', '==', false)
-      .get();
-    setPost([...fetchedPosts.docs]);
-  };
-  const onApprove = (id: string) => {
-    Alert.alert(`Item ${id} will be approved`);
-  };
-
-  const onReject = (id: string) => {
-    Alert.alert(`Item ${id} will be rejected`);
+      .doc(id)
+      .delete();
   };
 
   return (
@@ -44,7 +54,8 @@ const Dashboard: FC = props => {
         btn="md-chevron-back"
       />
       <FlatList
-        data={post}
+        showsVerticalScrollIndicator={false}
+        data={posts}
         renderItem={({item}) => (
           <RenderPendingPosts
             msg={item.data().msg}
@@ -55,7 +66,6 @@ const Dashboard: FC = props => {
           />
         )}
       />
-      <Button btnName="Refresh" onPress={fetchPendings} width={width * 0.9} />
     </SafeAreaView>
   );
 };

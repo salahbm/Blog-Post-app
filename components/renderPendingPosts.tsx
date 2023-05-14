@@ -21,9 +21,9 @@ interface Props {
 const formatTime = (timeStamp: number): string => {
   const calculatedTime = Date.now() - timeStamp;
 
-  const seconds = (Math.floor(calculatedTime / 1000) % 60) + `s`;
-  const minutes = (Math.floor(calculatedTime / 1000 / 60) % 60) + `m`;
-  const hours = Math.floor(calculatedTime / 1000 / 60 / 60) + `d`;
+  const seconds = Math.floor(calculatedTime / 1000) % 60;
+  const minutes = Math.floor(calculatedTime / 1000 / 60) % 60;
+  const hours = Math.floor(calculatedTime / 1000 / 60 / 60);
 
   return `${hours.toString().padStart(2, '0')}:${minutes
     .toString()
@@ -34,7 +34,7 @@ const RenderPendingPosts: FC<Props> = props => {
   return (
     <View style={styles.container}>
       <Text style={styles.msg}>{props.msg} </Text>
-      <Text style={styles.time}>{formatTime(props.timeStamp)} ago</Text>
+      <Text style={styles.time}>{formatTime(props.timeStamp)} </Text>
       <View
         style={{
           flexDirection: 'row',

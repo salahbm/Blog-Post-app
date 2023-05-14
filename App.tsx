@@ -12,8 +12,6 @@ function App(): JSX.Element {
 
   useEffect(() => {
     const subscribe = firebase.auth().onAuthStateChanged((userData: any) => {
-      console.log(`userData: ${userData}`);
-
       if (userData) {
         setUser(userData);
       } else {
@@ -22,7 +20,6 @@ function App(): JSX.Element {
     });
     subscribe();
   }, []);
-  console.log(`app:  ${app}`);
 
   return (
     <ContextData.Provider value={{setUser}}>

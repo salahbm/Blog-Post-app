@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Alert,
+  FlatList,
 } from 'react-native';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
@@ -50,7 +51,21 @@ const Home: FC = props => {
   useEffect(() => {
     currentUser();
   });
-
+  //show fetched posts
+  const [posts, setPosts] = useState<any>(null);
+  useEffect(() => {
+    const fetchPendings = async () => {
+      await firebase
+        .firestore()
+        .collection('posts')
+        .where('approved', '==', true)
+        .onSnapshot(querySnapshot => {
+          const docs = querySnapshot.docs;
+          setPosts(docs);
+        });
+    };
+    fetchPendings();
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <Header title="Home Screen" btn="home-outline" />
@@ -71,7 +86,29 @@ const Home: FC = props => {
       ) : null}
       <Button btnName="Post" width={width * 0.9} onPress={post} />
       <Button btnName="logout" width={width * 0.9} onPress={signout} />
+      <FlatList
+        data={posts}
+        renderItem={({item}) => (
+          <RenderApprovedPosts
+            msg={item.data().msg}
+            timeStamp={item.data().timeStamp}
+          />
+        )}
+      />
     </SafeAreaView>
+  );
+};
+
+interface Props {
+  msg: string;
+  timeStamp: number;
+}
+const RenderApprovedPosts: FC<Props> = props => {
+  return (
+    <View style={styles.container1}>
+      <Text style={styles.msg}>{props.msg} </Text>
+      <Text style={styles.time}>{props.timeStamp} </Text>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -87,6 +124,32 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginVertical: 10,
     padding: 15,
+  },
+  msg: {
+    fontSize: 18,
+    fontWeight: '800',
+    padding: 5,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#AEB6BF',
+    width: width * 0.8,
+    alignSelf: 'center',
+    marginVertical: 10,
+  },
+  time: {
+    fontSize: 15,
+    fontWeight: '600',
+    paddingHorizontal: 24,
+    textShadowRadius: 10,
+    shadowColor: '#333',
+  },
+  container1: {
+    backgroundColor: '#e3e3e3',
+    marginVertical: 10,
+    width: width * 0.9,
+    alignSelf: 'center',
+    borderRadius: 12,
+    padding: 5,
   },
 });
 export default Home;
