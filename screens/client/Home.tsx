@@ -87,6 +87,7 @@ const Home: FC = props => {
       <Button btnName="Post" width={width * 0.9} onPress={post} />
       <Button btnName="logout" width={width * 0.9} onPress={signout} />
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={posts}
         renderItem={({item}) => (
           <RenderApprovedPosts
