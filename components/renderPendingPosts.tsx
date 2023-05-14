@@ -21,9 +21,9 @@ interface Props {
 const formatTime = (timeStamp: number): string => {
   const calculatedTime = Date.now() - timeStamp;
 
-  const seconds = Math.floor(calculatedTime / 1000) % 60;
-  const minutes = Math.floor(calculatedTime / 1000 / 60) % 60;
-  const hours = Math.floor(calculatedTime / 1000 / 60 / 60);
+  const seconds = (Math.floor(calculatedTime / 1000) % 60) + `s`;
+  const minutes = (Math.floor(calculatedTime / 1000 / 60) % 60) + `m`;
+  const hours = Math.floor(calculatedTime / 1000 / 60 / 60) + `d`;
 
   return `${hours.toString().padStart(2, '0')}:${minutes
     .toString()
@@ -32,9 +32,9 @@ const formatTime = (timeStamp: number): string => {
 
 const RenderPendingPosts: FC<Props> = props => {
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.container}>
       <Text style={styles.msg}>{props.msg} </Text>
-      <Text style={styles.time}>{formatTime(props.timeStamp)} </Text>
+      <Text style={styles.time}>{formatTime(props.timeStamp)} ago</Text>
       <View
         style={{
           flexDirection: 'row',
@@ -42,12 +42,16 @@ const RenderPendingPosts: FC<Props> = props => {
 
           alignSelf: 'center',
         }}>
-        <Button
-          btnName="approve"
-          width={width * 0.4}
+        <TouchableOpacity
           onPress={props.onApprove}
-        />
-        <Button btnName="reject" width={width * 0.4} onPress={props.onReject} />
+          style={[styles.btn, {width: width * 0.36}]}>
+          <Text style={styles.name}>Accept </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={props.onReject}
+          style={[styles.btn, {width: width * 0.36, backgroundColor: 'red'}]}>
+          <Text style={styles.name}>Reject </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -62,7 +66,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: '#AEB6BF',
-    width: width * 0.9,
+    width: width * 0.8,
     alignSelf: 'center',
     marginVertical: 10,
   },
@@ -72,5 +76,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     textShadowRadius: 10,
     shadowColor: '#333',
+  },
+  container: {
+    backgroundColor: '#e3e3e3',
+    marginVertical: 10,
+    width: width * 0.9,
+    alignSelf: 'center',
+    borderRadius: 12,
+    padding: 5,
+  },
+  btn: {
+    height: 50,
+    backgroundColor: '#333',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 12,
+    alignSelf: 'center',
+    margin: 5,
+  },
+  name: {
+    color: '#FFFF',
+    fontWeight: '900',
+    fontSize: 16,
+    letterSpacing: 0.5,
+    lineHeight: 18,
   },
 });

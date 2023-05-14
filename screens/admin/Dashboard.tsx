@@ -28,7 +28,6 @@ const Dashboard: FC = props => {
       .get();
     setPost([...fetchedPosts.docs]);
   };
-
   const onApprove = (id: string) => {
     Alert.alert(`Item ${id} will be approved`);
   };

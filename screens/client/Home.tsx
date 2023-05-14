@@ -56,6 +56,7 @@ const Home: FC = props => {
       <Header title="Home Screen" btn="home-outline" />
       <TextInput
         style={styles.input}
+        multiline={true}
         placeholder="enter the msg"
         onChangeText={text => setMsg(text)}
       />
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e3e3e3',
     borderRadius: 12,
     marginVertical: 10,
-    padding: 5,
+    padding: 15,
   },
 });
 export default Home;

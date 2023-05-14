@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -16,6 +16,7 @@ import Header from '../components/Header';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+
 const Login: FC = props => {
   const [user, setUser] = useState<{
     password: string;
