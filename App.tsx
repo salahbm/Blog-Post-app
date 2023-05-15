@@ -20,6 +20,7 @@ function App(): JSX.Element {
     });
     subscribe();
   }, []);
+  console.log(app);
 
   return (
     <ContextData.Provider value={{setUser}}>
